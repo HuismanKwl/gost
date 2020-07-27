@@ -25,6 +25,8 @@ const Version = "2.11.1"
 // Debug is a flag that enables the debug log.
 var Debug bool
 
+var OutIP string
+
 var (
 	tinyBufferSize   = 512
 	smallBufferSize  = 2 * 1024  // 2KB small buffer

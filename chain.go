@@ -158,10 +158,20 @@ func (c *Chain) dialWithOptions(ctx context.Context, network, address string, op
 			}
 		default:
 		}
-		d := &net.Dialer{
-			Timeout: timeout,
-			// LocalAddr: laddr, // TODO: optional local address
+
+		laddr := "0.0.0.0"
+
+		if OutIP != "" {
+			laddr = OutIP
 		}
+
+		laddr += ":0"
+
+		d := &net.Dialer{
+			Timeout:   timeout,
+			LocalAddr: laddr, // TODO: optional local address
+		}
+
 		return d.DialContext(ctx, network, ipAddr)
 	}
 

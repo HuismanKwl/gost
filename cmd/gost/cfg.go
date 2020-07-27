@@ -23,6 +23,7 @@ type baseConfig struct {
 	route
 	Routes []route
 	Debug  bool
+	OutIP  string
 }
 
 func parseBaseConfig(s string) (*baseConfig, error) {
