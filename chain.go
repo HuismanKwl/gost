@@ -159,13 +159,15 @@ func (c *Chain) dialWithOptions(ctx context.Context, network, address string, op
 		default:
 		}
 
-		laddr := "0.0.0.0"
+		localAddr := "0.0.0.0"
 
 		if OutIP != "" {
-			laddr = OutIP
+			localAddr = OutIP
 		}
 
-		laddr += ":0"
+		localAddr += ":0"
+
+		laddr, _ := net.ResolveTCPAddr("tcp", localAddr)
 
 		d := &net.Dialer{
 			Timeout:   timeout,
