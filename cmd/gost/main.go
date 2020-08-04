@@ -34,7 +34,7 @@ func init() {
 	flag.StringVar(&configureFile, "C", "", "configure file")
 	flag.BoolVar(&baseCfg.Debug, "D", false, "enable debug log")
 	flag.BoolVar(&printVersion, "V", false, "print version")
-	flag.BoolVar(&baseCfg.OutIP, "I", "", "specify out ip")
+	flag.StringVar(&baseCfg.OutIP, "I", "", "specify out ip")
 	if pprofEnabled {
 		flag.StringVar(&pprofAddr, "P", ":6060", "profiling HTTP server address")
 	}
