@@ -162,11 +162,13 @@ func (c *Chain) dialWithOptions(ctx context.Context, network, address string, op
 
 		localAddr := "0.0.0.0"
 
-		if c.LocalIP != "" {
-			localAddr = c.LocalIP
+		if options.LocalIP != "" {
+			localAddr = options.LocalIP
 		}
 
 		localAddr += ":0"
+
+		log.Logf("[localAddr] %s: %s", localAddr, options.LocalIP)
 
 		laddr, _ := net.ResolveTCPAddr("tcp", localAddr)
 
@@ -341,6 +343,7 @@ type ChainOptions struct {
 	Timeout  time.Duration
 	Hosts    *Hosts
 	Resolver Resolver
+	LocalIP  string
 }
 
 // ChainOption allows a common way to set chain options.
@@ -371,5 +374,12 @@ func HostsChainOption(hosts *Hosts) ChainOption {
 func ResolverChainOption(resolver Resolver) ChainOption {
 	return func(opts *ChainOptions) {
 		opts.Resolver = resolver
+	}
+}
+
+// LocalIPChainOption specifies the LocalIP used by Chain.Dial.
+func LocalIPChainOption(ip string) ChainOption {
+	return func(opts *ChainOptions) {
+		opts.LocalIP = ip
 	}
 }

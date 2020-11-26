@@ -943,6 +943,7 @@ func (h *socks5Handler) handleConnect(conn net.Conn, req *gosocks5.Request) {
 			TimeoutChainOption(h.options.Timeout),
 			HostsChainOption(h.options.Hosts),
 			ResolverChainOption(h.options.Resolver),
+			LocalIPChainOption(h.options.Chain.LocalIP),
 		)
 		if err == nil {
 			break
