@@ -28,11 +28,13 @@ type route struct {
 	ServeNodes stringList
 	ChainNodes stringList
 	Retries    int
+	LocalIP    string
 }
 
 func (r *route) parseChain() (*gost.Chain, error) {
 	chain := gost.NewChain()
 	chain.Retries = r.Retries
+	chain.LocalIP = r.LocalIP
 	gid := 1 // group ID
 
 	for _, ns := range r.ChainNodes {

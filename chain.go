@@ -18,6 +18,7 @@ var (
 type Chain struct {
 	isRoute    bool
 	Retries    int
+	LocalIP    string
 	nodeGroups []*NodeGroup
 	route      []Node // nodes in the selected route
 }
@@ -161,8 +162,8 @@ func (c *Chain) dialWithOptions(ctx context.Context, network, address string, op
 
 		localAddr := "0.0.0.0"
 
-		if OutIP != "" {
-			localAddr = OutIP
+		if c.LocalIP != "" {
+			localAddr = c.LocalIP
 		}
 
 		localAddr += ":0"
